@@ -3,6 +3,7 @@
 
 from bisect import bisect_right
 from itertools import islice
+from collections import namedtuple
 
 def main():
     # Create a list of triples
@@ -67,16 +68,13 @@ class Collection():
         list_of_elements = "\n".join([str(triple) for triple in reversed(self.sol)])
         return "Maximum Payoff: {}\n{}".format(self.max_payoff, list_of_elements)
 
-class Triple():
+class Triple(namedtuple('Triple', 's f p')):
 
     def __init__(self, start, finish, payoff):
         if start >= finish:
             raise ValueError('Required: start < finish')
         if payoff <= 0:
             raise ValueError('Required: payoff > 0')
-        self.s = start
-        self.f = finish
-        self.p = payoff
 
     def __repr__(self):
         return "{} {} {}".format(self.s, self.f, self.p)
